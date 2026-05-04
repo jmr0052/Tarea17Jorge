@@ -174,28 +174,38 @@ public class LibraryManager {
 
     public void addBook(Book book) {
         // validate book - same validation as in processLoan, copy pasted
+        if (isInvalidBook(book)) return;
+        books.add(book);
+    }
+
+    private static boolean isInvalidBook(Book book) {
         if (book.isbn == null || book.isbn.isEmpty()) {
             System.out.println("ERROR: invalid isbn");
-            return;
+            return true;
         }
         if (book.title == null || book.title.isEmpty()) {
             System.out.println("ERROR: book has no title");
-            return;
+            return true;
         }
-        books.add(book);
+        return false;
     }
 
     public void addMember(Member member) {
         // validate member - same validation again, copy pasted
+        if (isInvalidMember(member)) return;
+        members.add(member);
+    }
+
+    private static boolean isInvalidMember(Member member) {
         if (member.memberId == null || member.memberId.isEmpty()) {
             System.out.println("ERROR: invalid member id");
-            return;
+            return true;
         }
         if (member.name == null || member.name.isEmpty()) {
             System.out.println("ERROR: member has no name");
-            return;
+            return true;
         }
-        members.add(member);
+        return false;
     }
 
     public String getMemberReport(String memberId) {
