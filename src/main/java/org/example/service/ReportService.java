@@ -17,15 +17,7 @@ public class ReportService {
     }
 
     public void printSummary() {
-        System.out.println("Library: " + manager.libraryName);
-        System.out.println("Members: " + manager.members.size());
-        System.out.println("Books: " + manager.books.size());
-        System.out.println("Loans processed: " + manager.totalLoansProcessed);
-        System.out.println("Fines collected: " + manager.totalFinesCollected);
-        // directly accessing manager internals, too intimate
-        System.out.println("Revenue: " + manager.totalRevenue);
-        System.out.println("Director: " + manager.libraryDirector);
-        System.out.println("Address: " + manager.libraryAddress);
+        System.out.println(manager.getSummaryInfo());
     }
 
     public String buildMemberSummary(String memberId) {

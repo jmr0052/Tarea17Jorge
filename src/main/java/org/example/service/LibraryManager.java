@@ -236,4 +236,15 @@ public class LibraryManager {
         }
         return found.name + " | loans: " + total + " | fines: " + totalFines + " | last book: " + lastBook;
     }
+
+    public String getSummaryInfo() {
+        return "Library: " + libraryName +
+                "\nMembers: " + members.size() +
+                "\nBooks: " + books.size() +
+                "\nLoans processed: " + totalLoansProcessed +
+                "\nFines collected: " + totalFinesCollected +
+                "\nRevenue: " + totalRevenue +
+                "\nDirector: " + libraryDirector +
+                "\nAddress: " + libraryAddress;
+    }
 }
