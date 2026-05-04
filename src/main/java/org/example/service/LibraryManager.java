@@ -1,5 +1,6 @@
 package org.example.service;
 
+import org.checkerframework.checker.nullness.qual.Nullable;
 import org.example.model.Book;
 import org.example.model.Loan;
 import org.example.model.Member;
@@ -35,12 +36,7 @@ public class LibraryManager {
     // this method is way too long, does too many things at once
     public String processLoan(String memberId, String isbn, LocalDate loanDate) {
         // validate member
-        Member foundMember = null;
-        for (Member m : members) {
-            if (m.memberId.equals(memberId)) {
-                foundMember = m;
-            }
-        }
+        Member foundMember = findMemberById(memberId);
         if (foundMember == null) {
             return "ERROR: member not found";
         }
@@ -52,12 +48,7 @@ public class LibraryManager {
         }
 
         // validate book
-        Book foundBook = null;
-        for (Book b : books) {
-            if (b.isbn.equals(isbn)) {
-                foundBook = b;
-            }
-        }
+        Book foundBook = findBookByIsbn(isbn);
         if (foundBook == null) {
             return "ERROR: book not found";
         }
@@ -109,6 +100,26 @@ public class LibraryManager {
         reportLines.add("Loan: " + foundMember.name + " borrowed " + foundBook.title + " on " + loanDate);
 
         return "OK: loan created";
+    }
+
+    private @Nullable Book findBookByIsbn(String isbn) {
+        Book foundBook = null;
+        for (Book b : books) {
+            if (b.isbn.equals(isbn)) {
+                foundBook = b;
+            }
+        }
+        return foundBook;
+    }
+
+    private @Nullable Member findMemberById(String memberId) {
+        Member foundMember = null;
+        for (Member m : members) {
+            if (m.memberId.equals(memberId)) {
+                foundMember = m;
+            }
+        }
+        return foundMember;
     }
 
     public double calculateFine(Loan loan, LocalDate today) {
