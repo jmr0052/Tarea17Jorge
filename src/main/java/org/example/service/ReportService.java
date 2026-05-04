@@ -63,7 +63,7 @@ public class ReportService {
     }
 
     public void generateReport() {
-        System.out.println("=== Report for " + manager.libraryName + " ===");
+        System.out.println("=== Report for " + manager.info.name + " ===");
         System.out.println("Total loans: " + manager.totalLoansProcessed);
         System.out.println("Total fines: " + manager.totalFinesCollected);
         System.out.println("Total revenue: " + manager.totalRevenue);

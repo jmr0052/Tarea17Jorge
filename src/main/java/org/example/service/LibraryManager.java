@@ -20,16 +20,12 @@ public class LibraryManager {
     public double totalFinesCollected = 0.0;
     public double totalRevenue = 0.0;
     public int totalLoansProcessed = 0;
-    public String libraryName;
-    public String libraryAddress;
-    public String libraryPhone;
-    public String libraryEmail;
-    public String libraryDirector;
+    public LibraryInfo info;
     public int maxBooksPerMember;
     public double fineRatePerDay = 0.5;
 
     public LibraryManager(String libraryName) {
-        this.libraryName = libraryName;
+        this.info = new LibraryInfo(libraryName);
         this.maxBooksPerMember = 3;
     }
 
@@ -203,13 +199,13 @@ public class LibraryManager {
     }
 
     public String getSummaryInfo() {
-        return "Library: " + libraryName +
+        return "Library: " + info.name +
                 "\nMembers: " + members.size() +
                 "\nBooks: " + books.size() +
                 "\nLoans processed: " + totalLoansProcessed +
                 "\nFines collected: " + totalFinesCollected +
                 "\nRevenue: " + totalRevenue +
-                "\nDirector: " + libraryDirector +
-                "\nAddress: " + libraryAddress;
+                "\nDirector: " + info.director +
+                "\nAddress: " + info.address;
     }
 }

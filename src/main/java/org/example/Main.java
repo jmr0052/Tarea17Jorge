@@ -11,10 +11,10 @@ public class Main {
     public static void main(String[] args) {
 
         LibraryManager manager = new LibraryManager("City Library");
-        manager.libraryAddress = "123 Main Street";
-        manager.libraryPhone = "555-1234";
-        manager.libraryEmail = "info@citylibrary.com";
-        manager.libraryDirector = "Anna Smith";
+        manager.info.address = "123 Main Street";
+        manager.info.phone = "555-1234";
+        manager.info.email = "info@citylibrary.com";
+        manager.info.director = "Anna Smith";
 
         Book b1 = new Book("La sombra del viento", "Carlos Ruiz Zafon", "978-8408163435", true, "Novel", 2001, 17.00);
         Book b2 = new Book("Patria", "Fernando Aramburu", "978-8490665552", true, "Novel", 2016, 15.50);
