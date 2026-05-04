@@ -41,4 +41,4 @@ School project for the Clean Code subject. The idea was to write a Java app with
 1. Clone it: `git clone https://github.com/jmr0052/Tarea17Jorge.git`
 2. Open in IntelliJ and wait for Maven to load (takes a moment the first time)
 3. Run Main.java for the console app
-4. Run LibrarySeleniumTest.java for the tests, need Chrome installed for that one
+4. Run LibrarySeleniumTest.java for the tests, need Chrome installed for that one.
