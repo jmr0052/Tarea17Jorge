@@ -37,4 +37,28 @@ public class ReportService {
         }
         return found.name + " | loans: " + total + " | fines: " + totalFines;
     }
+
+    public String getMemberReport(String memberId) {
+        Member found = null;
+        for (Member m : manager.members) {
+            if (m.memberId.equals(memberId)) found = m;
+        }
+        if (found == null) return "Member not found";
+
+        int total = 0;
+        double totalFines = 0.0;
+        LocalDate lastLoan = null;
+        String lastBook = "";
+        for (Loan l : manager.loans) {
+            if (l.member.memberId.equals(memberId)) {
+                total++;
+                totalFines += l.book.price * 0.01;
+                if (lastLoan == null || l.loanDate.isAfter(lastLoan)) {
+                    lastLoan = l.loanDate;
+                    lastBook = l.book.title;
+                }
+            }
+        }
+        return found.name + " | loans: " + total + " | fines: " + totalFines + " | last book: " + lastBook;
+    }
 }

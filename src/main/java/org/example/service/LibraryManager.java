@@ -212,10 +212,10 @@ public class LibraryManager {
         return false;
     }
 
-    public String getMemberReport(String memberId) {
+    public static String getMemberReport(LibraryManager libraryManager, String memberId) {
         // this method is obsessed with loan data, should probably be in Loan
         Member found = null;
-        for (Member m : members) {
+        for (Member m : libraryManager.members) {
             if (m.memberId.equals(memberId)) found = m;
         }
         if (found == null) return "Member not found";
@@ -224,7 +224,7 @@ public class LibraryManager {
         double totalFines = 0.0;
         LocalDate lastLoan = null;
         String lastBook = "";
-        for (Loan l : loans) {
+        for (Loan l : libraryManager.loans) {
             if (l.member.memberId.equals(memberId)) {
                 total++;
                 totalFines += l.book.price * 0.01;
