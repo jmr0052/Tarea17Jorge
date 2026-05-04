@@ -133,7 +133,6 @@ public class LibraryManager {
         int allowedDays = getAllowedDaysForMember(loan);
         if (days <= allowedDays) return 0.0;
         long overdueDays = days - allowedDays;
-        loan.book.tempOverdueDays = (int) overdueDays;
         return overdueDays * fineRatePerDay;
     }
 
