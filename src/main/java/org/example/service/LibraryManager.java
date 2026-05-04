@@ -71,20 +71,7 @@ public class LibraryManager {
         }
 
         // calculate max books allowed based on member type
-        int maxAllowed;
-        switch (foundMember.memberType) {
-            case "TEACHER":
-                maxAllowed = 6;
-                break;
-            case "STUDENT":
-                maxAllowed = 3;
-                break;
-            case "GUEST":
-                maxAllowed = 1;
-                break;
-            default:
-                maxAllowed = 2;
-        }
+        int maxAllowed = getMaxLoansForMember(foundMember);
 
         if (currentLoans >= maxAllowed) {
             return "ERROR: member has reached loan limit";
@@ -100,6 +87,24 @@ public class LibraryManager {
         reportLines.add("Loan: " + foundMember.name + " borrowed " + foundBook.title + " on " + loanDate);
 
         return "OK: loan created";
+    }
+
+    private static int getMaxLoansForMember(Member foundMember) {
+        int maxAllowed;
+        switch (foundMember.memberType) {
+            case "TEACHER":
+                maxAllowed = 6;
+                break;
+            case "STUDENT":
+                maxAllowed = 3;
+                break;
+            case "GUEST":
+                maxAllowed = 1;
+                break;
+            default:
+                maxAllowed = 2;
+        }
+        return maxAllowed;
     }
 
     private @Nullable Book findBookByIsbn(String isbn) {
@@ -125,6 +130,14 @@ public class LibraryManager {
     public double calculateFine(Loan loan, LocalDate today) {
         if (loan.returned) return 0.0;
         long days = ChronoUnit.DAYS.between(loan.loanDate, today);
+        int allowedDays = getAllowedDaysForMember(loan);
+        if (days <= allowedDays) return 0.0;
+        long overdueDays = days - allowedDays;
+        loan.book.tempOverdueDays = (int) overdueDays;
+        return overdueDays * fineRatePerDay;
+    }
+
+    private static int getAllowedDaysForMember(Loan loan) {
         int allowedDays;
         // duplicated logic again
         switch (loan.member.memberType) {
@@ -140,10 +153,7 @@ public class LibraryManager {
             default:
                 allowedDays = 10;
         }
-        if (days <= allowedDays) return 0.0;
-        long overdueDays = days - allowedDays;
-        loan.book.tempOverdueDays = (int) overdueDays;
-        return overdueDays * fineRatePerDay;
+        return allowedDays;
     }
 
     public void returnBook(Loan loan, LocalDate returnDate) {
