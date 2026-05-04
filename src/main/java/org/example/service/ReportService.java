@@ -61,4 +61,14 @@ public class ReportService {
         }
         return found.name + " | loans: " + total + " | fines: " + totalFines + " | last book: " + lastBook;
     }
+
+    public void generateReport() {
+        System.out.println("=== Report for " + manager.libraryName + " ===");
+        System.out.println("Total loans: " + manager.totalLoansProcessed);
+        System.out.println("Total fines: " + manager.totalFinesCollected);
+        System.out.println("Total revenue: " + manager.totalRevenue);
+        for (String line : manager.reportLines) {
+            System.out.println(line);
+        }
+    }
 }

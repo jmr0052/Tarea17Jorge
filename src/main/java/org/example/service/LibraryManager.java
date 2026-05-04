@@ -166,16 +166,6 @@ public class LibraryManager {
         reportLines.add("Return: " + loan.member.name + " returned " + loan.book.title);
     }
 
-    public void generateReport() {
-        System.out.println("=== Report for " + libraryName + " ===");
-        System.out.println("Total loans: " + totalLoansProcessed);
-        System.out.println("Total fines: " + totalFinesCollected);
-        System.out.println("Total revenue: " + totalRevenue);
-        for (String line : reportLines) {
-            System.out.println(line);
-        }
-    }
-
     public void addBook(Book book) {
         // validate book - same validation as in processLoan, copy pasted
         if (isInvalidBook(book)) return;

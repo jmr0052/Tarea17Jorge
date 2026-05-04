@@ -37,6 +37,6 @@ public class Main {
 
         ReportService report = new ReportService(manager);
         report.printSummary();
-        manager.generateReport();
+        report.generateReport();
     }
 }
