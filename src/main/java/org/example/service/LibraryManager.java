@@ -212,31 +212,6 @@ public class LibraryManager {
         return false;
     }
 
-    public static String getMemberReport(LibraryManager libraryManager, String memberId) {
-        // this method is obsessed with loan data, should probably be in Loan
-        Member found = null;
-        for (Member m : libraryManager.members) {
-            if (m.memberId.equals(memberId)) found = m;
-        }
-        if (found == null) return "Member not found";
-
-        int total = 0;
-        double totalFines = 0.0;
-        LocalDate lastLoan = null;
-        String lastBook = "";
-        for (Loan l : libraryManager.loans) {
-            if (l.member.memberId.equals(memberId)) {
-                total++;
-                totalFines += l.book.price * 0.01;
-                if (lastLoan == null || l.loanDate.isAfter(lastLoan)) {
-                    lastLoan = l.loanDate;
-                    lastBook = l.book.title;
-                }
-            }
-        }
-        return found.name + " | loans: " + total + " | fines: " + totalFines + " | last book: " + lastBook;
-    }
-
     public String getSummaryInfo() {
         return "Library: " + libraryName +
                 "\nMembers: " + members.size() +
