@@ -156,22 +156,6 @@ public class LibraryManager {
         }
     }
 
-    // nobody calls this method anymore, left here just in case
-    public void printAllBooks() {
-        for (Book b : books) {
-            System.out.println(b.title + " - " + b.author);
-        }
-    }
-
-    // also unused
-    public int countAvailableBooks() {
-        int count = 0;
-        for (Book b : books) {
-            if (b.available) count++;
-        }
-        return count;
-    }
-
     public void addBook(Book book) {
         // validate book - same validation as in processLoan, copy pasted
         if (isInvalidBook(book)) return;
