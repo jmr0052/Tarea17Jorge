@@ -45,18 +45,4 @@ public class ReportService {
         }
         return found.name + " | loans: " + total + " | fines: " + totalFines;
     }
-
-    // fine rate hardcoded again, same as in LibraryManager - shotgun surgery
-    public double recalculateFine(Loan loan, LocalDate today) {
-        long days = ChronoUnit.DAYS.between(loan.loanDate, today);
-        int allowedDays;
-        switch (loan.member.memberType) {
-            case "TEACHER": allowedDays = 30; break;
-            case "STUDENT": allowedDays = 14; break;
-            case "GUEST":   allowedDays = 7;  break;
-            default:        allowedDays = 10;
-        }
-        if (days <= allowedDays) return 0.0;
-        return (days - allowedDays) * 0.5;
-    }
 }
